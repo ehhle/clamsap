@@ -1,0 +1,25 @@
+================
+ClamSAP Overview
+================
+
+The libraries clamsap and clamdsap are so-called 
+Virus Scan Adapter for ClamAV. The Virus Scan Adapter allows
+an vendor independent integration of virus scan engines
+into the SAP landscape. With this adapter, SAP 
+servers can scan for viruses.
+
+For more information about the SAP Virus Scan Interface
+you should have a look at:
+http://scn.sap.com/docs/DOC-7838
+
+The interface is free-ware, means free of use for everybody.
+
+The specification of this is available here:
+ftp://ftp.sap.com/pub/icc/nw-vsi/VSA-Specification.pdf
+
+For testing the interface, you should download the VSA-SDK package:
+ftp://ftp.sap.com/pub/icc/nw-vsi
+
+For questions, comments and so on, please contact the author.
+
+(C) Copyright Markus Strehle (markus.strehle@sap.com)
