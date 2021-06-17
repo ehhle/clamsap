@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vsclam", "vsclam.vcproj", "{DF557149-A4F4-43BC-9E32-BD8CB8955CED}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vsclamd", "vsclamd.vcproj", "{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		DebugSAPinternal|Win32 = DebugSAPinternal|Win32
+		Release|Win32 = Release|Win32
+		ReleaseSAPinteral|Win32 = ReleaseSAPinteral|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.Debug|Win32.Build.0 = Debug|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.DebugSAPinternal|Win32.ActiveCfg = DebugSAPinternal|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.DebugSAPinternal|Win32.Build.0 = DebugSAPinternal|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.Release|Win32.ActiveCfg = Release|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.Release|Win32.Build.0 = Release|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.ReleaseSAPinteral|Win32.ActiveCfg = ReleaseSAPinteral|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CED}.ReleaseSAPinteral|Win32.Build.0 = ReleaseSAPinteral|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.Debug|Win32.Build.0 = Debug|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.DebugSAPinternal|Win32.ActiveCfg = DebugSAPinternal|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.DebugSAPinternal|Win32.Build.0 = DebugSAPinternal|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.Release|Win32.ActiveCfg = Release|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.Release|Win32.Build.0 = Release|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.ReleaseSAPinteral|Win32.ActiveCfg = ReleaseSAPinteral|Win32
+		{DF557149-A4F4-43BC-9E32-BD8CB8955CAD}.ReleaseSAPinteral|Win32.Build.0 = ReleaseSAPinteral|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

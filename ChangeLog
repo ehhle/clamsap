@@ -1,0 +1,117 @@
+CHANGES
+========
+0.103.2 - June 2021
+Limit pcre matcher
+
+0.103.0 - April 2021
+Increase Version because tested with latest clam engine
+Support new parameter SCANHEURISTICLEVEL 
+
+0.101.9 - Jan. 2021
+Enhance JPEG check
+
+0.101.8
+0.101.7 - Apr. 2020
+Fix html check
+
+0.101.6 - Mar. 2020
+Use short for for office MIME types
+
+0.101.5 - Dec. 2019
+Use libmagic for buffer scan
+
+0.101.4 - Dec. 2019
+Direct integration of libmagic.
+
+0.101.3 - Dec. 2019
+Correct MIME type name from libmagic.
+
+0.101.2 - Dec. 2019
+Fix multibyte text type detection
+
+0.101.1 - Nov. 2019
+Improve load of libclamav on linux 0.101.1
+
+0.101.0 - Nov. 2019
+Fix interface change from clamav 0.101.x
+
+-------------------
+0.100.2 - Nov. 2019
+-------------------
+Fix parser of SAR files
+Fix MIME detection for TEXT files
+
+0.99.25 - 20. Dec 2016
+-------------------------
+Add Office Mime Detected, to be independent from libmagic
+
+0.99.2 - 30. Jun 2016
+-------------------------
+Fix compare of block extension, soves https://sourceforge.net/p/clamsap/bugs/2/
+
+0.99.1 - 20. Feb 2016
+-------------------------
+[WIN] fix load of libclamav.dll
+
+0.99.0 - 04. Feb 2016
+-------------------------
+Check for SAR extract
+
+0.98.9 - 11. November 2015
+-------------------------
+Improve MIME check
+Fix SAP archive decompression
+
+0.98.8 - 21. October 2015
+-------------------------
+Fix for internal MIME check
+
+0.98.7 - 18. September 2015
+-------------------------
+Enhance error messages in case of initialisation errors.
+Create default sym.link for libclamdsap
+
+0.9.86 - 30. May 2015
+-------------------------
+Fix problem, if libmagic can not be found in VsaStartup
+Security fix for compression, see CVE-2015-2282 and CVE-2015-2278
+Enhance buffer scan in libclamdsap
+
+0.9.8  - 30. March 2015
+-------------------------
+Support of NW-VSI 2.00
+This includes the support of MIME type detection in addition to AV.
+Use code from SAP example adapter to provide SAP archive format scan.
+see http://scn.sap.com/docs/DOC-7838
+
+0.9.74 - 20. April 2012
+-------------------------
+Allow to connect are remote clam daemon (clamd)
+Configure the remote clam daemon with parameter INITSERVERS (server:port)
+Configure with parameter SCANACCESSFILELOCAL if the remote clam daemon can
+access a local file locally (via NFS / Samba)
+
+0.9.7 - 25. March 2011
+-------------------------
+Adaptation for ClamAV 0.97
+Prevent multiple byte code initialisation
+
+0.9.6 - 01. November 2010
+-------------------------
+Adaptation for ClamAV 0.96.x
+
+0.9.5 - 05. August 2009
+-----------------------
+Release library vsclamd (for clamd) and Adaptation for ClamAV 0.95
+
+0.9.1 - 18. August 2008
+-----------------------
+Minor improvements for misc. compiler
+Test on Linux (x86, x86_64), Sun Solaris, Windows
+
+0.9.0 - 15. August 2008
+-----------------------
+Initial release of beta library vsclam
+
+x.x.x
+-----------------------

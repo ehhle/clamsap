@@ -1,0 +1,118 @@
+//
+// vssym.rc
+//
+#ifdef APSTUDIO_INVOKED
+       #error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+#include "afxres.h"
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+// common sap version numbers
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+// SAP version template for MS
+///////////////////////////////////////////////////////////////////////////// 
+/* first include of SAPPCPROJ wins */
+#ifndef SAPPCPROJ_VERSION_FILE
+#define SAPPCPROJ_VERSION_FILE      1
+#endif
+// change always both defines together
+#define SAPPCPROJ_VERSION           1
+#define SAPPCPROJ_VERSION_STR      "1"
+/* /////////////////////////////////////////////////////////////////////////// */
+/*  other version specific information */
+/* /////////////////////////////////////////////////////////////////////////// */
+#define SAPPCPROJ_COMMENT                    "SAP Virus Scan Interface (NW-VSI) Adapter"
+#define SAPPCPROJ_DESCRIPTION                "ClamAV daemon client for NW-VSI"
+#define SAPPCPROJ_NAME                       "CLAMSAP"
+#define SAPPCPROJ_PRODUCTNAME                "ClamAV daemon client for NW-VSI"
+#define SAPPCPROJ_FILENAME                   "clamdsap.dll"	
+#define SAPPCPROJ_HINT                       "Clamdaemon Adapter"
+/* /////////////////////////////////////////////////////////////////////////// */
+/*  other SAP specific version information */
+/* /////////////////////////////////////////////////////////////////////////// */
+#ifndef SAP_COPYRIGHT_START
+#define SAP_COPYRIGHT_START   "Copyright (c) Markus Strehle 2003"
+#endif
+#ifndef SAP_COPYRIGHT_END
+#define SAP_COPYRIGHT_END     " - 2021"
+#endif
+#ifndef SAP_FILE_VERS
+#define SAP_FILE_VERS         0, 10, 3, 2
+#endif
+#ifndef SAP_FILE_VERS_STR
+#define SAP_FILE_VERS_STR     "0, 10, 3, 2\0"
+#endif
+#ifndef SAP_PRODUCT_VERS
+#define SAP_PRODUCT_VERS      0, 10, 3, 2
+#endif
+#ifndef SAP_PRODUCT_VERS_STR
+#define SAP_PRODUCT_VERS_STR  "0, patch 101, changelist 5\0"
+#endif
+#ifndef SAP_PLATFORM
+#define SAP_PLATFORM          "ntintel\0"
+#endif
+#ifndef SAP_BUILD_TYPE
+#define SAP_BUILD_TYPE        "\0"
+#endif
+#ifndef SAP_FILE_FLAGS
+#define SAP_FILE_FLAGS        0x23L
+#endif
+
+// create version resource with sap common release and patch number 
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION SAP_FILE_VERS
+ PRODUCTVERSION SAP_PRODUCT_VERS
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040704b0"
+        BEGIN
+            VALUE "Comments", SAPPCPROJ_COMMENT "\0"
+            VALUE "CompanyName", " \0"
+            VALUE "FileDescription", SAPPCPROJ_DESCRIPTION "\0"
+            VALUE "FileVersion", SAP_FILE_VERS_STR
+            VALUE "InternalName", SAPPCPROJ_NAME "\0"
+            VALUE "LegalCopyright", SAP_COPYRIGHT_START SAP_COPYRIGHT_END
+            VALUE "LegalTrademarks", "SAP\256 is a registered trademark of SAP SE.\0"
+            VALUE "OriginalFilename", SAPPCPROJ_FILENAME "\0"
+            VALUE "Platform", SAP_PLATFORM
+            VALUE "ProductName", SAPPCPROJ_PRODUCTNAME "\0"
+            VALUE "ProductVersion", SAP_PRODUCT_VERS_STR
+            VALUE "SpecialBuild", SAP_BUILD_TYPE
+            VALUE "SAP hint", SAPPCPROJ_HINT "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x407, 1200
+    END
+END
+/////////////////////////////////////////////////////////////////////////////
+// SAP version template for MS
+///////////////////////////////////////////////////////////////////////////// 
+// ICON
+//
+#endif    // not APSTUDIO_INVOKED
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+/////////////////////////////////////////////////////////////////////////////
+#endif

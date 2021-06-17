@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{81a3f227-0cd6-4d1b-b364-a6026108871f}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4d8b441b-2829-419c-929e-16788294a5e5}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Header Files\SAP">
+      <UniqueIdentifier>{f7d6fe9f-08e4-4524-8d36-ee9d63b90056}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{9bf11a22-bf60-483a-95c0-ccfca4cf83e8}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="vsclam.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="csdecompr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vsmime.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="vsclam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\vsaxxtyp.h">
+      <Filter>Header Files\SAP</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ext\clamav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="csdecompr.h">
+      <Filter>Header Files\SAP</Filter>
+    </ClInclude>
+    <ClInclude Include="vsmime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="vsclam.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
