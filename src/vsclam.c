@@ -1240,7 +1240,7 @@ DLL_EXPORT VsaScan(
             (const char**)&virname,
             &scanned,
             (const struct cl_engine *)p_init->hEngine,
-            &usrdata->cl_scan_options);
+            &usrdata.cl_scan_options);
 }
 #endif
         /* CCQ_ON */
