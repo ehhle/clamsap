@@ -31,7 +31,7 @@
 /*                                                                    */
 /*  Author:    Markus Strehle, SAP AG (mailto:markus.strehle@sap.com) */
 /*  Reviewer:                                                         */
-/*  Version:       0.99                                               */
+/*  Version:       1.103.x                                            */
 /*                                                                    */
 /*  Created:                                                          */
 /*    20 June 2005  Markus Strehle                                    */
