@@ -12,6 +12,7 @@ config/compile
 configure
 libtool
 stamp-h1
+*.so
 *.o
 *.la
 *.lo
