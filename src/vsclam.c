@@ -731,10 +731,8 @@ DLL_EXPORT VsaInit( const PVSA_CALLBACK p_callback,
         pClamFPtr->fp_cl_engine_free(engine);
         CLEANUP(VSA_E_DRIVER_FAILED);
     }
-#ifdef CL_ENGINE_PCRE_MATCH_LIMIT
+#ifndef CL_SCAN_STDOPT
     pClamFPtr->fp_cl_engine_set_num(engine, CL_ENGINE_PCRE_MATCH_LIMIT, (long long) 2000);
-#endif
-#ifdef CL_ENGINE_PCRE_RECMATCH_LIMIT
     pClamFPtr->fp_cl_engine_set_num(engine, CL_ENGINE_PCRE_RECMATCH_LIMIT, (long long) 2000);
 #endif
     /* CCQ_ON */
