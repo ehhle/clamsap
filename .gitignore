@@ -1,5 +1,6 @@
 Makefile
 src/.deps
+src/.libs
 Makefile.in
 aclocal.m4
 autom4te.cache/
@@ -11,3 +12,6 @@ config/compile
 configure
 libtool
 stamp-h1
+*.o
+*.la
+*.lo
