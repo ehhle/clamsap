@@ -547,7 +547,7 @@ VSA_RC addVirusInfo(UInt            uiJobID,
         SETSTRING((*pp_virusinfo)[lInfected].pszVirusName,pszVirusName);
     }
     else {
-        SETSTRING((*pp_virusinfo)[lInfected].pszVirusName,"Generic Infection");
+        SETSTRING((*pp_virusinfo)[lInfected].pszVirusName,"Scanner.Limits.Exceeded");
     }
     if(pszFreeTextInfo) {
         SETSTRING((*pp_virusinfo)[lInfected].pszFreeTextInfo,pszFreeTextInfo);

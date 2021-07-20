@@ -348,8 +348,8 @@ DLL_EXPORT VsaGetConfig(PPVSA_CONFIG pp_config)
         { VS_OP_SCANONLYHEURISTIC      ,   VS_TYPE_BOOL   ,      0,     (void*)0},
         { VS_OP_SCANLIMIT              ,   VS_TYPE_SIZE_T ,      0,     (void*)0},
         { VS_OP_SCANEXTRACT            ,   VS_TYPE_BOOL   ,      0,     (void*)1},
-        { VS_OP_SCANEXTRACT_SIZE       ,   VS_TYPE_SIZE_T ,      0,     (void*)10485760},
-        { VS_OP_SCANEXTRACT_DEPTH      ,   VS_TYPE_INT    ,      0,     (void*)8}
+        { VS_OP_SCANEXTRACT_SIZE       ,   VS_TYPE_SIZE_T ,      0,     (void*)0},
+        { VS_OP_SCANEXTRACT_DEPTH      ,   VS_TYPE_INT    ,      0,     (void*)0}
 #ifdef VSI2_COMPATIBLE
         ,
         { VS_OP_SCANMIMETYPES          ,   VS_TYPE_CHAR   ,      0,     (void*)""},
@@ -2103,6 +2103,9 @@ static VSA_RC vsaSetScanConfig(VSA_SCANPARAM *p_scanparam,VSA_OPTPARAMS *p_optpa
              if ((p_optparams->pOptParam[i].pvValue)!=NULL) {
                 usrdata->cl_scan_options.heuristic = (unsigned int)p_optparams->pOptParam[i].pvValue;
                 usrdata->cl_scan_options.general |= 0x4;
+             } else {
+                usrdata->cl_scan_options.heuristic = 0;
+                usrdata->cl_scan_options.general = 0;
              }
         break;
         case VS_OP_SCANONLYHEURISTIC:
