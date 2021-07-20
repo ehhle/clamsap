@@ -52,7 +52,7 @@ extern "C"
 #ifdef CLAMSAP_VERSION
 #define VSA_ADAPTER_VERSION    CLAMSAP_VERSION
 #else
-#define VSA_ADAPTER_VERSION    "0.103.2.0"
+#define VSA_ADAPTER_VERSION    "0.103.3.0"
 #endif
 #define VSA_ADAPTER_MAJVER     0
 #define VSA_ADAPTER_MINVER     1015

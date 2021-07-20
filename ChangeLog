@@ -1,5 +1,9 @@
 CHANGES
 ========
+0.103.3 - July 2021
+Remove own default settings from VsaGetConfig and rely on clamav defaults
+Change default virusname in case clamav does not return any virus name.
+
 0.103.2 - June 2021
 Limit pcre matcher
 
