@@ -1035,7 +1035,6 @@ DLL_EXPORT VsaScan(
         VS_OBJECTTYPE_T a = VS_OT_UNKNOWN;
         VS_OBJECTTYPE_T b = VS_OT_UNKNOWN;
         size_t current_read = 0;
-        FILE *_fp = NULL;
 
         if(p_scanparam->tScanCode == VSA_SP_BYTES) {
             usrdata.lObjectSize = p_scanparam->lLength;
@@ -1129,7 +1128,7 @@ DLL_EXPORT VsaScan(
                 }
             } while(current_read > 0 || rc != VSA_OK);
         }
-        if(_fp) fclose(_fp);
+        FCLOSE_SAFE(_fp);
         if(rc) CLEANUP(rc);
         if(usrdata.tFileType != usrdata.tObjectType)
         {
@@ -1432,12 +1431,8 @@ DLL_EXPORT VsaScan(
     }
 #endif
     /* Exception handling */
-cleanup:    
-    if (_fp != NULL)
-    {
-        fclose(_fp);
-        _fp = NULL;
-    }
+cleanup:
+    FCLOSE_SAFE(_fp);
     switch(rc)
     {
     case VSA_E_NOT_SUPPORTED:
@@ -1974,11 +1969,7 @@ static VSA_RC scanFile(
     }
 cleanup:
     if(pAnswer) free(pAnswer);
-    if(_fp != NULL)
-    {
-        fclose(_fp);
-        _fp = NULL;
-    }
+    FCLOSE_SAFE(_fp);
     return rc;
 } /* scanFile */
 

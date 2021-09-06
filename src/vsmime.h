@@ -128,6 +128,12 @@ typedef DLL_MAGIC_CALL *DLL_MAGIC_ADR;
         buf = NULL;                                                     \
 }
 
+#define FCLOSE_SAFE( __FP )                                             \
+    if (__FP != NULL)                                                   \
+    {                                                                   \
+        fclose(__FP);                                                   \
+        __FP = NULL;                                                    \
+    }
 /*--------------------------------------------------------------------*/
 /* helper functions                                                   */
 /*--------------------------------------------------------------------*/
