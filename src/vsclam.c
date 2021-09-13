@@ -2050,7 +2050,7 @@ static VSA_RC vsaSetScanConfig(VSA_SCANPARAM *p_scanparam,VSA_OPTPARAMS *p_optpa
                 usrdata->cl_scan_options.parse |= ~0; /* enable all parsers */
                 usrdata->cl_scan_options.heuristic |= ~0; /* enable all heuristics */
                 usrdata->cl_scan_options.mail |= ~0; /* enable all mail */
-                usrdata->cl_scan_options. general |= 0xd;
+                usrdata->cl_scan_options.general |= ~0;
             }
             else {
                 usrdata->bScanBestEffort = FALSE;
@@ -2097,7 +2097,7 @@ static VSA_RC vsaSetScanConfig(VSA_SCANPARAM *p_scanparam,VSA_OPTPARAMS *p_optpa
         case VS_OP_SCANHEURISTICLEVEL:
              if ((p_optparams->pOptParam[i].pvValue)!=NULL) {
                 usrdata->cl_scan_options.heuristic = (unsigned int)p_optparams->pOptParam[i].pvValue;
-                usrdata->cl_scan_options.general |= 0x4;
+                usrdata->cl_scan_options.general |= 0xf;
              } else {
                 usrdata->cl_scan_options.heuristic = 0;
                 usrdata->cl_scan_options.general = 0;
@@ -2180,7 +2180,7 @@ static VSA_RC scanFile(
                 (const char**)&virname,
                 &scanned,
                 (const struct cl_engine *)pEngine,
-                &pUsrData->cl_scan_options);
+                &(pUsrData->cl_scan_options));
 #endif
             /* CCQ_ON */
         if(clam_rc != CL_CLEAN)
