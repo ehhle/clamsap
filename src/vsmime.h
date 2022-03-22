@@ -204,6 +204,7 @@ VSA_RC addVirusInfo(UInt            uiJobID,
     UInt            lInfected,
     PPVSA_VIRUSINFO pp_virusinfo);
 
+PChar getCleanFilePatch(PChar orgFileName, size_t maxlen, PChar resultBuffer);
 #ifdef __cplusplus
 }
 #endif

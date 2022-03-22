@@ -2382,6 +2382,7 @@ static VSA_RC scanCompressed(
             {
                 FILE *fpOut = NULL;
                 Char szFileName[1024];
+                Char szEntryName[512];
                 PChar  _tmpPath = NULL; /* CCQ_OFF */
                 if(getenv("TMPDIR") == NULL) {
 #ifdef _WIN32
@@ -2392,7 +2393,7 @@ static VSA_RC scanCompressed(
                 } else {
                     _tmpPath = (PChar)strdup(getenv("TMPDIR"));
                 }
-                sprintf((char*)szFileName,"%.500s%.10s%.500s",(char*)_tmpPath,DIR_SEP,sentry->name);
+                sprintf((char*)szFileName,"%.500s%.10s%.510s",(char*)_tmpPath, DIR_SEP, (char*)getCleanFilePatch(sentry->name, 511, &szEntryName));
                 if(_tmpPath) free(_tmpPath);
 
                 fpOut = fopen((const char*)szFileName,"wb");

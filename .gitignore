@@ -12,6 +12,8 @@ config/compile
 configure
 libtool
 stamp-h1
+.cproject
+.project
 *.so
 *.o
 *.la

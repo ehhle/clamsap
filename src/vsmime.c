@@ -1602,3 +1602,20 @@ cleanup:
     return rc;
 } /* checkContentType */
 
+PChar getCleanFilePatch(PChar orgFileName, size_t maxlen, PChar resultBuffer)
+{
+    PChar      pTmp;
+    size_t     index = 0;
+    for (pTmp = orgFileName; *pTmp && index < maxlen; ++pTmp)
+    {
+        if (('\\' == *pTmp) || ('/' == *pTmp)) {
+            resultBuffer[index++] = '_';
+        }
+        else {
+            resultBuffer[index++] = *pTmp;
+        }
+    }
+    resultBuffer[index] = 0;
+    return resultBuffer;
+} /* getCleanFilePatch */
+
