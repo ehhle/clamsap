@@ -1450,7 +1450,8 @@ static void * memstr2(const char *l,size_t l_len,const char *s,size_t s_len)
 VSA_RC check4ActiveContent(
     PByte           pObject,
     size_t          lObjectSize,
-    VS_OBJECTTYPE_T tObjectType)
+    VS_OBJECTTYPE_T tObjectType,
+    Bool            bPdfAllowOpenAction)
 {
     char  *p = NULL;
     char  *str = (char*)pObject;
@@ -1507,8 +1508,13 @@ VSA_RC check4ActiveContent(
     else if(tObjectType == VS_OT_PDF)
     {
         p = memstr2(str,lObjectSize,(const char*)"/JS",3);
-        if(p == NULL)
-            p = memstr2(str,lObjectSize,(const char*)"/OpenAction",11);
+        if (p == NULL) {
+            p = memstr2(str, lObjectSize, (const char*)"/OpenAction", 11);
+            if (p != NULL && bPdfAllowOpenAction)
+            {
+                return VSA_OK;
+            }
+        }
     }
     else if(tObjectType == VS_OT_MSO)
     {

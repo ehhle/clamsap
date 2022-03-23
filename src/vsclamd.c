@@ -397,7 +397,8 @@ DLL_EXPORT VsaGetConfig(PPVSA_CONFIG pp_config)
     static MY_OPTPARAMS _optparams[] = {
         { VS_OP_SCANBESTEFFORT         ,   VS_TYPE_BOOL   ,      0,     (void*)1},
         { VS_OP_SCANALLFILES           ,   VS_TYPE_BOOL   ,      0,     (void*)1},
-        { VS_OP_SCANACCESSFILELOCAL    ,   VS_TYPE_BOOL   ,      0,     (void*)1}
+        { VS_OP_SCANACCESSFILELOCAL    ,   VS_TYPE_BOOL   ,      0,     (void*)1},
+        { VS_OP_SCANEXCLUDEMIMETYPES   ,   VS_TYPE_CHAR   ,      0,     (void*)""}
 #ifdef VSI2_COMPATIBLE
         ,
         { VS_OP_SCANEXTRACT            ,   VS_TYPE_BOOL   ,      0,     (void*)1},
@@ -1070,7 +1071,7 @@ DLL_EXPORT VsaScan(
                 }
                 if(usrdata.bActiveContent == TRUE)
                 {
-                    rc = check4ActiveContent(pBuff,current_read,usrdata.tObjectType);
+                    rc = check4ActiveContent(pBuff,current_read,usrdata.tObjectType,usrdata.bPdfAllowOpenAction);
                     if(rc) {
                         if(pp_scinfo != NULL && (*pp_scinfo) != NULL) {
                             addVirusInfo(p_scanparam->uiJobID,
@@ -1798,6 +1799,17 @@ static VSA_RC vsaSetOptConfig(VSA_OPTPARAMS *p_optparams, USRDATA *usrdata)
                 usrdata->bScanCompressed = FALSE;
             }
             break;
+        case VS_OP_SCANEXCLUDEMIMETYPES:
+            if ((p_optparams->pOptParam[i].pvValue) != NULL) {
+                PChar in = (PChar)(p_optparams->pOptParam[i].pvValue);
+                size_t inlen = p_optparams->pOptParam[i].lLength;
+                /* CCQ_OFF */
+                if (usrdata->bActiveContent && inlen > 0 && *in && (strstr((const char*)in, "application/pdf-openaction"))) {
+                    usrdata->bPdfAllowOpenAction = TRUE;
+                }
+                /* CCQ_ON */
+            }
+            break;
 #ifdef VSI2_COMPATIBLE
         case VS_OP_SCANMIMETYPES:
         case VS_OP_SCANEXTENSIONS:
@@ -2097,7 +2109,8 @@ static VSA_RC scanCompressed(
                 rc = check4ActiveContent(
                     _decompr,
                     lLength,
-                    pUsrData->tObjectType);
+                    pUsrData->tObjectType,
+                    pUsrData->bPdfAllowOpenAction);
                 if(rc) CLEANUP(rc);
             }
             /*
@@ -2382,7 +2395,8 @@ static VSA_RC scanCompressedBuffer(
                 rc = check4ActiveContent(
                     _decompr,
                     lLength,
-                    pUsrData->tObjectType);
+                    pUsrData->tObjectType,
+                    pUsrData->bPdfAllowOpenAction);
                 if(rc) CLEANUP(rc);
             }
             /*

@@ -131,6 +131,7 @@ struct usrdata {
     UInt            iComress2Level;
     Bool            bMimeCheck;
     Bool            bActiveContent;
+    Bool            bPdfAllowOpenAction;
     PChar           pszScanMimeTypes;
     PChar           pszBlockMimeTypes;
     PChar           pszScanExtensions;

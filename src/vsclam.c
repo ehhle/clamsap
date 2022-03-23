@@ -349,7 +349,8 @@ DLL_EXPORT VsaGetConfig(PPVSA_CONFIG pp_config)
         { VS_OP_SCANLIMIT              ,   VS_TYPE_SIZE_T ,      0,     (void*)0},
         { VS_OP_SCANEXTRACT            ,   VS_TYPE_BOOL   ,      0,     (void*)1},
         { VS_OP_SCANEXTRACT_SIZE       ,   VS_TYPE_SIZE_T ,      0,     (void*)0},
-        { VS_OP_SCANEXTRACT_DEPTH      ,   VS_TYPE_INT    ,      0,     (void*)0}
+        { VS_OP_SCANEXTRACT_DEPTH      ,   VS_TYPE_INT    ,      0,     (void*)0},
+        { VS_OP_SCANEXCLUDEMIMETYPES   ,   VS_TYPE_CHAR   ,      0,     (void*)""}
 #ifdef VSI2_COMPATIBLE
         ,
         { VS_OP_SCANMIMETYPES          ,   VS_TYPE_CHAR   ,      0,     (void*)""},
@@ -1056,7 +1057,7 @@ DLL_EXPORT VsaScan(
                 rc = getByteType(pBuff,(current_read < sizeof(bbyte)-1)?current_read:sizeof(bbyte)-1,p_scanparam->pszObjectName,szExt2,szExt,szMimeType,0,&status,&text,&a,&b,&usrdata.tFileType,&usrdata.tObjectType);
                 if(usrdata.bActiveContent == TRUE)
                 {
-                    rc = check4ActiveContent(pBuff,sizeof(bbyte) - 1,usrdata.tObjectType);
+                    rc = check4ActiveContent(pBuff,sizeof(bbyte) - 1,usrdata.tObjectType, usrdata.bPdfAllowOpenAction);
                     if(rc) {
                         if(pp_scinfo != NULL && (*pp_scinfo) != NULL) {
                             addVirusInfo(p_scanparam->uiJobID,
@@ -2108,6 +2109,17 @@ static VSA_RC vsaSetScanConfig(VSA_SCANPARAM *p_scanparam,VSA_OPTPARAMS *p_optpa
                 usrdata->cl_scan_options.general |= 0x8;
              }
         break;
+        case VS_OP_SCANEXCLUDEMIMETYPES:
+            if ((p_optparams->pOptParam[i].pvValue) != NULL) {
+                PChar in = (PChar)(p_optparams->pOptParam[i].pvValue);
+                size_t inlen = p_optparams->pOptParam[i].lLength;
+                /* CCQ_OFF */
+                if (usrdata->bActiveContent && inlen > 0 && *in && (strstr((const char*)in, "application/pdf-openaction"))) {
+                    usrdata->bPdfAllowOpenAction = TRUE;
+                }
+                /* CCQ_ON */
+            }
+        break;
 #ifdef VSI2_COMPATIBLE
         case VS_OP_SCANMIMETYPES:
         case VS_OP_SCANEXTENSIONS:
@@ -2357,7 +2369,8 @@ static VSA_RC scanCompressed(
                 rc = check4ActiveContent(
                     _decompr,
                     lLength,
-                    pUsrData->tObjectType);
+                    pUsrData->tObjectType,
+                    pUsrData->bPdfAllowOpenAction);
                 if(rc) CLEANUP(rc);
             }
             /*
@@ -2393,7 +2406,7 @@ static VSA_RC scanCompressed(
                 } else {
                     _tmpPath = (PChar)strdup(getenv("TMPDIR"));
                 }
-                sprintf((char*)szFileName,"%.500s%.10s%.510s",(char*)_tmpPath, DIR_SEP, (char*)getCleanFilePatch(sentry->name, 511, &szEntryName));
+                sprintf((char*)szFileName,"%.500s%.10s%.510s",(char*)_tmpPath, DIR_SEP, (char*)getCleanFilePatch(sentry->name, 511, (PChar)&szEntryName));
                 if(_tmpPath) free(_tmpPath);
 
                 fpOut = fopen((const char*)szFileName,"wb");

@@ -52,6 +52,7 @@
 
 #include "vsaxxtyp.h"
 
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -159,7 +160,8 @@ VSA_RC getByteType(PByte pByte,
 VSA_RC check4ActiveContent(
     PByte           pObject,
     size_t          lObjectSize,
-    VS_OBJECTTYPE_T tObjectType);
+    VS_OBJECTTYPE_T tObjectType,
+    Bool            bPdfAllowOpenAction);
 
 VSA_RC checkContentType(
     PChar           pExtension,
