@@ -52,7 +52,6 @@
 
 #include "vsaxxtyp.h"
 
-
 #ifdef __cplusplus
 extern "C"
 {
