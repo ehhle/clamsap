@@ -1,4 +1,4 @@
-/* Copyright (c) 2001 - 2021, Markus Strehle, SAP SE
+/* Copyright (c) 2001 - 2022, Markus Strehle, SAP SE
  *
  * MIT License, http://www.opensource.org/licenses/mit-license.php
  * 
@@ -52,10 +52,10 @@ extern "C"
 #ifdef CLAMSAP_VERSION
 #define VSA_ADAPTER_VERSION    CLAMSAP_VERSION
 #else
-#define VSA_ADAPTER_VERSION    "0.103.3.2"
+#define VSA_ADAPTER_VERSION    "0.103.4"
 #endif
 #define VSA_ADAPTER_MAJVER     0
-#define VSA_ADAPTER_MINVER     1015
+#define VSA_ADAPTER_MINVER     1035
 #define VSA_VENDORINFO         "OpenSource Project CLAMSAP (http://sourceforge.net/projects/clamsap/) "
 #define VSA_VENDORINFO_LN      (sizeof(VSA_VENDORINFO)-1)
 #define VSA_ADAPTERNAME        "CLAMDSAP: ClamAV daemon to SAP NW-VSI Adapter Version: "VSA_ADAPTER_VERSION" "
