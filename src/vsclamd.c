@@ -1,4 +1,4 @@
-/* Copyright (c) 2012 - 2021, Markus Strehle, SAP SE
+/* Copyright (c) 2012 - 2022, Markus Strehle, SAP SE
  *
  * MIT License, http://www.opensource.org/licenses/mit-license.php
  * 
@@ -31,7 +31,7 @@
 /*                                                                    */
 /*  Author:    Markus Strehle, SAP AG (mailto:markus.strehle@sap.com) */
 /*  Reviewer:                                                         */
-/*  Version:       1.103.x                                            */
+/*  Version:       1.104.x                                            */
 /*                                                                    */
 /*  Created:                                                          */
 /*    20 June 2005  Markus Strehle                                    */
