@@ -1087,6 +1087,8 @@ DLL_EXPORT VsaScan(
                                     usrdata.pszBlockMimeTypes,
                                     usrdata.pszScanExtensions,
                                     usrdata.pszBlockExtensions,
+                                    usrdata.bScanMimeTypesWildCard,
+                                    usrdata.bBlockMimeTypesWildCard,
                                     szErrorName,
                                     szErrorFreeName);
                     if(rc) {
@@ -2388,6 +2390,8 @@ static VSA_RC scanCompressed(
                     pUsrData->pszBlockMimeTypes,
                     pUsrData->pszScanExtensions,
                     pUsrData->pszBlockExtensions,
+                    pUsrData->bScanMimeTypesWildCard,
+                    pUsrData->bBlockMimeTypesWildCard,
                     szErrorName,
                     szErrorFreeName);
                 if(rc) CLEANUP(rc);
@@ -2479,6 +2483,17 @@ static VSA_RC vsaSetContentTypeParametes(VSA_OPTPARAM *param,
             return VSA_E_INVALID_PARAM;
         }
         dest[i] = tolower((int)in[i]);
+        if (mime == TRUE && in[i] == '*')
+        {
+            if (param->tCode == VS_OP_SCANMIMETYPES)
+            {
+                pUsrData->bScanMimeTypesWildCard = TRUE;
+            }
+            else if (param->tCode == VS_OP_BLOCKMIMETYPES)
+            {
+                pUsrData->bBlockMimeTypesWildCard = TRUE;
+            }
+        }
     }
     if(i>0 && i < (inlen * 2) && dest[i] != ';')
         dest[i] = ';';

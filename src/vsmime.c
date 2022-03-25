@@ -85,6 +85,11 @@ static void setByteType(PChar fileName,
 
 static PChar vsaGetByteMimeType(void *pBuffer, size_t lBuffer);
 
+static PChar GetWildCardMimePart(PChar mimeList, size_t mimeListLen, Bool* pHasWildCard);
+
+static Bool WildcardMimeCheck(PChar mimeList, PChar mimeEntry);
+static Bool WildcardMatch(PChar wildcard, size_t wildcarLen, PChar string, size_t stringLen);
+
 typedef enum TYPE_STATUS {
     UNKNOWN,
     BEGIN,
@@ -1549,6 +1554,8 @@ VSA_RC checkContentType(
     PChar           pszBlockMimeTypes,
     PChar           pszScanExtensions,
     PChar           pszBlockExtensions,
+    Bool            bScanMimeTypesWildCard,
+    Bool            bBlockMimeTypesWildCard,
     PChar           errname,
     PChar           errfreename
     )
@@ -1556,6 +1563,7 @@ VSA_RC checkContentType(
     char   *p = NULL;
     VSA_RC  rc = VSA_OK;
     char   *str = NULL;
+    Bool wildCardMatch = FALSE;
 
     if(pszScanMimeTypes != NULL)
     {
@@ -1563,20 +1571,36 @@ VSA_RC checkContentType(
         p = strstr(str,(const char*)pMimeType);
         if(p == NULL)
         {
-            sprintf((char*)errname,"MIME type %.100s is not allowed (whitelist %.850s)",pMimeType,(const char*)pszScanMimeTypes);
-            errfreename = (PChar)"Check SCANMIMETYPES parameter";
-            CLEANUP(VSA_E_BLOCKED_BY_POLICY);
+            wildCardMatch = FALSE;
+            if (bScanMimeTypesWildCard)
+            {
+                wildCardMatch = WildcardMimeCheck(pszScanMimeTypes, pMimeType);
+            }
+            if (!wildCardMatch)
+            {
+                sprintf((char*)errname, "MIME type %.100s is not allowed (whitelist %.850s)", pMimeType, (const char*)pszScanMimeTypes);
+                errfreename = (PChar)"Check SCANMIMETYPES parameter";
+                CLEANUP(VSA_E_BLOCKED_BY_POLICY);
+            }
         }
     }
     if(pszBlockMimeTypes != NULL)
     {
         str = (char*)pszBlockMimeTypes;
         p = strstr(str,(const char*)pMimeType);
-        if(p != NULL)
+        if (p != NULL)
         {
-            sprintf((char*)errname,"MIME type %.100s is not allowed (blacklist %.850s)",pMimeType,(const char*)pszBlockMimeTypes);
-            errfreename = (PChar)"Check BLOCKMIMETYPES parameter";
-            CLEANUP(VSA_E_BLOCKED_BY_POLICY);
+            wildCardMatch = TRUE;
+            if (bBlockMimeTypesWildCard)
+            {
+                wildCardMatch = WildcardMimeCheck(pszBlockMimeTypes, pMimeType);
+            }
+            if (wildCardMatch)
+            {
+                 sprintf((char*)errname,"MIME type %.100s is not allowed (blacklist %.850s)",pMimeType,(const char*)pszBlockMimeTypes);
+                 errfreename = (PChar)"Check BLOCKMIMETYPES parameter";
+                 CLEANUP(VSA_E_BLOCKED_BY_POLICY);
+            }
         }
     }
     if(pszScanExtensions != NULL)
@@ -1625,3 +1649,88 @@ PChar getCleanFilePatch(PChar orgFileName, size_t maxlen, PChar resultBuffer)
     return resultBuffer;
 } /* getCleanFilePatch */
 
+static Bool WildcardMimeCheck(PChar mimeList, PChar mimeEntry)
+{
+    PChar b = mimeList;
+    PChar p = NULL;
+    Bool hasWildCard = FALSE;
+    size_t mimeListLen = strlen((const char*)mimeList);
+    size_t entryLen;
+    size_t mimeLen = strlen((const char*)mimeEntry);
+    p = GetWildCardMimePart(b, mimeListLen, &hasWildCard);
+    while (mimeLen > 0 && p != NULL && b != NULL)
+    {
+        entryLen = (p - b);
+        mimeListLen -= entryLen - 1;
+        if (hasWildCard && WildcardMatch(b, entryLen, mimeEntry, mimeLen))
+        {
+            return TRUE;
+        }
+        b = ++p;
+        p = GetWildCardMimePart(b, mimeListLen, &hasWildCard);
+    }
+    return FALSE;
+} /* WildcardMimeCheck */
+
+static PChar GetWildCardMimePart(PChar mimeList, size_t mimeListLen, Bool* pHasWildCard)
+{
+    size_t mimeIndex = 0;
+    *pHasWildCard = FALSE;
+    while (mimeIndex < mimeListLen)
+    {
+        if (mimeList[mimeIndex] == '*')
+        {
+            *pHasWildCard = TRUE;
+        }
+        else if (mimeList[mimeIndex] == ';')
+        {
+            return (mimeList + mimeIndex);
+        }
+        mimeIndex++;
+    }
+    return NULL;
+} /* GetWildCardMimePart */
+
+static Bool WildcardMatch(PChar wildcard, size_t wildcarLen, PChar string, size_t stringLen)
+{
+    size_t cp = 0, mp = 0, wildIndex = 0, stringIndex = 0;
+
+    while ((stringIndex < stringLen) && (wildcard[wildIndex] != '*'))
+    {
+        if ((wildcard[wildIndex] != string[stringIndex]) && (wildcard[wildIndex] != '?'))
+        {
+            return FALSE;
+        }
+        wildIndex++;
+        stringIndex++;
+    }
+
+    while (stringIndex < stringLen)
+    {
+        if (wildcard[wildIndex] == '*')
+        {
+            if (!wildcard[++wildIndex])
+            {
+                return TRUE;
+            }
+            mp = wildIndex;
+            cp = stringIndex + 1;
+        }
+        else if ((wildcard[wildIndex] == string[stringIndex]) || (wildcard[wildIndex] == '?'))
+        {
+            wildIndex++;
+            stringIndex++;
+        }
+        else
+        {
+            wildIndex = mp;
+            stringIndex = cp++;
+        }
+    }
+
+    while (wildcard[wildIndex] == '*')
+    {
+        wildIndex++;
+    }
+    return !(wildIndex < wildcarLen);
+} /* WildcardMatch */

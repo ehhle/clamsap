@@ -138,6 +138,8 @@ struct usrdata {
     Bool            bMimeCheck;
     Bool            bActiveContent;
     Bool            bPdfAllowOpenAction;
+    Bool            bScanMimeTypesWildCard;
+    Bool            bBlockMimeTypesWildCard;
     PChar           pszScanMimeTypes;
     PChar           pszBlockMimeTypes;
     PChar           pszScanExtensions;

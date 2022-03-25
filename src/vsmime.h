@@ -169,6 +169,8 @@ VSA_RC checkContentType(
     PChar           pszBlockMimeTypes,
     PChar           pszScanExtensions,
     PChar           pszBlockExtensions,
+    Bool            bScanMimeTypesWildCard,
+    Bool            bBlockMimeTypesWildCard,
     PChar           errname,
     PChar           errfreename
     );
