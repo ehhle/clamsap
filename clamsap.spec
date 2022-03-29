@@ -16,7 +16,7 @@
 
 Summary:            Virus Scan Adapter (VSA) for ClamAV
 Name:               clamsap
-Version:            0.103.4
+Version:            0.104.1
 Release:            1
 License:            MIT
 Group:              Productivity/Security

@@ -1,5 +1,8 @@
 CHANGES
 ========
+0.104.1 - Mar. 2022
+Add feature: wildcard support for MIME settings
+
 0.103.4 - Mar. 2022
 Fix SAR file content scan
 Add option for PDF active content
