@@ -1,5 +1,5 @@
 # init
-AC_INIT(clamsap, 0.104.1, markus.strehle@sap.com)
+AC_INIT(clamsap, 0.104.2, markus.strehle@sap.com)
 
 # put configure auxiliary into config
 AC_CONFIG_AUX_DIR([config])
@@ -12,7 +12,7 @@ AC_CANONICAL_HOST
 AC_CANONICAL_SYSTEM
 
 # Automake initialization
-AM_INIT_AUTOMAKE(clamsap, 0.104.1)
+AM_INIT_AUTOMAKE(clamsap, 0.104.2)
 
 # Checks for programs.
 AC_PROG_CC
@@ -31,7 +31,7 @@ fi
 
 dnl change this on a release
 dnl VERSION="devel-`date +%Y%m%d`"
-VERSION="0.104.1"
+VERSION="0.104.2"
 AC_DEFINE_UNQUOTED([VERSION],"$VERSION",[Version number of package])
 
 LC_CURRENT=9

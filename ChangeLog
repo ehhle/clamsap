@@ -1,5 +1,8 @@
 CHANGES
 ========
+0.104.2 - May 2022
+Relax javascript check in PDF
+
 0.104.1 - Mar. 2022
 Add feature: wildcard support for MIME settings
 
