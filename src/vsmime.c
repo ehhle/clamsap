@@ -90,6 +90,18 @@ static PChar GetWildCardMimePart(PChar mimeList, size_t mimeListLen, Bool* pHasW
 static Bool WildcardMimeCheck(PChar mimeList, PChar mimeEntry);
 static Bool WildcardMatch(PChar wildcard, size_t wildcarLen, PChar string, size_t stringLen);
 
+static void adjustCustomType(PChar fileName,
+                             PChar fileExt,
+                             PChar ext,
+                             PChar mimetype,
+                             PChar defaultExt,
+                             PChar defaultMimeType,
+                             PByte pBuffer,
+                             size_t lBuffer,
+                             VS_OBJECTTYPE_T *st_type,
+                             VS_OBJECTTYPE_T *st_tEnd,
+                             VS_OBJECTTYPE_T tFileType);
+
 typedef enum TYPE_STATUS {
     UNKNOWN,
     BEGIN,
@@ -1105,20 +1117,7 @@ cleanup:
                     (*st_type) = VS_OT_UNKNOWN;
             }
             else {
-                if((*st_type) == VS_OT_ZIP && (*st_tEnd) == VS_OT_UNKNOWN)
-                    (*st_type) = VS_OT_ZIP;
-                else if((*st_type) == VS_OT_PDF && (*st_tEnd) == VS_OT_UNKNOWN)
-                    (*st_type) = VS_OT_PDF;
-                else if((*st_type) == VS_OT_XHTML && tFileType == VS_OT_TEXT)
-                    (*st_type) = VS_OT_TEXT;
-                else if((*st_type) == VS_OT_TEXT && tFileType == VS_OT_TEXT)
-                    (*st_type) = VS_OT_TEXT;
-                else if((*st_type) == VS_OT_XHTML && tFileType == VS_OT_HTML)
-                    (*st_type) = VS_OT_HTML;
-                else if((*st_type) == VS_OT_HTML && tFileType == VS_OT_HTML)
-                    (*st_type) = VS_OT_HTML;
-                else
-                    (*st_type) = VS_OT_BINARY;
+                adjustCustomType(fileName,fileExt,ext,mimetype,(PChar)".bin",(PChar)"unknown/unknown",pByte,lByte,st_type,st_tEnd,tFileType);
             }
         } else {
             if((*st_tEnd) == VS_OT_UNKNOWN && (*st_type) == VS_OT_UNKNOWN && tFileType == VS_OT_TEXT) {
@@ -1280,6 +1279,74 @@ cleanup:
     if(intext) *intext = text;
     return rc;
 } /* getByteType */
+
+static void adjustCustomType(PChar fileName,
+                             PChar fileExt,
+                             PChar ext,
+                             PChar mimetype,
+                             PChar defaultExt,
+                             PChar defaultMimeType,
+                             PByte pBuffer,
+                             size_t lBuffer,
+                             VS_OBJECTTYPE_T *st_type,
+                             VS_OBJECTTYPE_T *st_tEnd,
+                             VS_OBJECTTYPE_T tFileType)
+{
+    switch((*st_type)) {
+        case VS_OT_ZIP:
+            if ((*st_tEnd) == VS_OT_UNKNOWN) {
+                (*st_type) = VS_OT_ZIP;
+            } else {
+                (*st_type) = VS_OT_UNKNOWN;
+            }
+            break;
+        case VS_OT_PDF:
+            if ((*st_tEnd) == VS_OT_UNKNOWN) {
+                (*st_type) = VS_OT_PDF;
+            } else {
+                (*st_type) = VS_OT_UNKNOWN;
+            }
+            break;
+        case VS_OT_XHTML:
+            if (tFileType == VS_OT_TEXT) {
+                (*st_type) = VS_OT_TEXT;
+            } else if(tFileType == VS_OT_HTML) {
+                (*st_type) = VS_OT_HTML;
+            } else {
+                (*st_type) = VS_OT_UNKNOWN;
+            }
+            break;
+        case VS_OT_TEXT:
+            if (tFileType == VS_OT_TEXT) {
+                (*st_type) = VS_OT_TEXT;
+            } else {
+                (*st_type) = VS_OT_UNKNOWN;
+            }
+            break;
+        case VS_OT_HTML:
+            if (tFileType == VS_OT_HTML) {
+                (*st_type) = VS_OT_HTML;
+            } else {
+                (*st_type) = VS_OT_UNKNOWN;
+            }
+            break;
+        case VS_OT_XML:
+            if (tFileType == VS_OT_XML) {
+                setByteType(fileName,fileExt,ext,mimetype,defaultExt,defaultMimeType,pBuffer,lBuffer);
+                if (0 == memcmp(ext,".xml",4) && 0 == memcmp(mimetype,"text/xml",8)) {
+                    (*st_type) = VS_OT_XML;
+                } else {
+                    (*st_type) = VS_OT_UNKNOWN;
+                }
+            } else {
+                (*st_type) = VS_OT_UNKNOWN;
+            }
+            break;
+        default:
+            (*st_type) = VS_OT_BINARY;
+            break;
+    }
+}
 
 static void setByteType(PChar fileName,
                         PChar fileExt,
