@@ -1335,6 +1335,8 @@ static void adjustCustomType(PChar fileName,
                 setByteType(fileName,fileExt,ext,mimetype,defaultExt,defaultMimeType,pBuffer,lBuffer);
                 if (0 == memcmp(ext,".xml",4) && 0 == memcmp(mimetype,"text/xml",8)) {
                     (*st_type) = VS_OT_XML;
+                } else if (0 == memcmp(ext,".xml",4) && 0 == memcmp(mimetype,"application/xml",15)) {
+                    (*st_type) = VS_OT_XML;
                 } else {
                     (*st_type) = VS_OT_UNKNOWN;
                 }
@@ -1345,6 +1347,10 @@ static void adjustCustomType(PChar fileName,
         default:
             (*st_type) = VS_OT_BINARY;
             break;
+    }
+
+    if ((*st_type) == VS_OT_UNKNOWN) {
+        strcpy((char *)mimetype,(const char *)"unknown/unknown");
     }
 }
 
