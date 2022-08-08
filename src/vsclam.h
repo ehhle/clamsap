@@ -52,10 +52,10 @@ extern "C"
 #ifdef CLAMSAP_VERSION
 #define VSA_ADAPTER_VERSION    CLAMSAP_VERSION
 #else
-#define VSA_ADAPTER_VERSION    "0.104.2"
+#define VSA_ADAPTER_VERSION    "0.104.3"
 #endif
 #define VSA_ADAPTER_MAJVER     0
-#define VSA_ADAPTER_MINVER     1042
+#define VSA_ADAPTER_MINVER     1043
 #define VSA_VENDORINFO         "OpenSource Project CLAMSAP (http://sourceforge.net/projects/clamsap/) "
 #define VSA_VENDORINFO_LN      (sizeof(VSA_VENDORINFO)-1)
 #define VSA_ADAPTERNAME        "CLAMSAP: ClamAV to SAP NW-VSI Adapter Version: "VSA_ADAPTER_VERSION" "

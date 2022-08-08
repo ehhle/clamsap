@@ -1,5 +1,8 @@
 CHANGES
 ========
+0.104.3 - Aug. 2022
+Fix XML MIME type detection using libmagic
+
 0.104.2 - May 2022
 Relax javascript check in PDF
 

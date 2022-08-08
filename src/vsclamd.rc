@@ -44,13 +44,13 @@
 #define SAP_COPYRIGHT_END     " - 2022"
 #endif
 #ifndef SAP_FILE_VERS
-#define SAP_FILE_VERS         0, 10, 4, 2
+#define SAP_FILE_VERS         0, 10, 4, 3
 #endif
 #ifndef SAP_FILE_VERS_STR
-#define SAP_FILE_VERS_STR     "0, 10, 4, 2\0"
+#define SAP_FILE_VERS_STR     "0, 10, 4, 3\0"
 #endif
 #ifndef SAP_PRODUCT_VERS
-#define SAP_PRODUCT_VERS      0, 10, 4, 2
+#define SAP_PRODUCT_VERS      0, 10, 4, 3
 #endif
 #ifndef SAP_PRODUCT_VERS_STR
 #define SAP_PRODUCT_VERS_STR  "0, patch 101, changelist 5\0"
