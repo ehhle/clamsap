@@ -13,6 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: clamav-devel
+      run: sudo apt install -y libclamav-dev
     - name: pre-pare
       run: aclocal && autoconf && autoheader && libtoolize && automake --add-missing && autoreconf --install --force
     - name: configure
